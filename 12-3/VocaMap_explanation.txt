@@ -1,0 +1,26 @@
+VocaMap explanation
+
+1. This program implements a TOEIC vocabulary dictionary using GenericHashMap_KV.
+
+2. The key is the keyword string.
+   The value is a Voca pointer.
+
+3. GenericHashMap_KV uses a bucket array and separate chaining.
+   Each bucket is implemented as a list.
+
+4. The bucket index is calculated as follows.
+
+   bucket_index = std::hash<K>{}(key) % bucket_array_size
+
+5. The program prints the bucket index whenever each Voca object is inserted.
+   Therefore, the user can check which bucket stores each keyword.
+
+6. If the same keyword appears more than once, the existing value is replaced.
+   For example, mean appears as NOUN, ADJ, and VERB.
+   Since all of them use the same key "mean", only the latest inserted value remains.
+
+7. This shows that the current HashMap structure stores only one value for one key.
+   Therefore, multiple values for the same keyword cannot be stored at the same time.
+
+8. To store multiple values for the same keyword, the value type should be changed.
+   For example, GenericHashMap_KV<string, vector<Voca*>> can store several Voca objects for one keyword.
